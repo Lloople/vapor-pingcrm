@@ -1,22 +1,26 @@
 import Fluent
-import FluentMySQLDriver
+import FluentSQLiteDriver
 import Vapor
 
-// configures your application
 public func configure(_ app: Application) throws {
-    // uncomment to serve files from /Public folder
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    app.databases.use(.mysql(
-        hostname: Environment.get("DATABASE_HOST") ?? "localhost",
-        port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? MySQLConfiguration.ianaPortNumber,
-        username: Environment.get("DATABASE_USERNAME") ?? "vapor_username",
-        password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
-        database: Environment.get("DATABASE_NAME") ?? "vapor_database"
-    ), as: .mysql)
+    configureDatabase(app)
+    
+    try migrate(app)
 
-    app.migrations.add(CreateTodo())
-
-    // register routes
     try routes(app)
+}
+
+public func configureDatabase(_ app: Application) {
+    app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
+}
+
+public func migrate(_ app: Application) throws {
+    app.migrations.add(CreatePasswordResetsTable())
+    app.migrations.add(CreateAccountsTable())
+    app.migrations.add(CreateUsersTable())
+    app.migrations.add(CreateOrganizationsTable())
+    app.migrations.add(CreateContactsTable())
 }
