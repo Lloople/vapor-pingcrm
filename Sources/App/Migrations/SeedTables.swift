@@ -9,9 +9,9 @@ struct SeedTables: Migration {
         
         return createAccount(database).flatMap { account -> EventLoopFuture<[Contact]> in
             
-            createOwner(database, account)
+            _ = createOwner(database, account)
             
-            createUsers(database, account, faker)
+            _ = createUsers(database, account, faker)
             
             return createOrgs(database, account, faker).flatMap { orgs -> EventLoopFuture<[Contact]> in
                 return createContacts(database, account, faker, orgs)

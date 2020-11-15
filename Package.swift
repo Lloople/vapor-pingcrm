@@ -11,7 +11,9 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
-        .package(name: "Fakery", url: "https://github.com/Jeehut/Fakery.git", .branch("master"))
+        .package(url: "https://github.com/Jeehut/Fakery.git", .branch("master")),
+        .package(url: "https://github.com/vapor/leaf.git", from: "4.0.0"),
+        .package(url: "https://github.com/lloople/vapor-inertia-adapter.git", from: "0.2.0")
     ],
     targets: [
         .target(
@@ -20,6 +22,8 @@ let package = Package(
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
                 .product(name: "Fakery", package: "Fakery"),
+                .product(name: "Leaf", package: "leaf"),
+                .product(name: "VaporInertiaAdapter", package: "vapor-inertia-adapter"),
                 .product(name: "Vapor", package: "vapor")
             ],
             swiftSettings: [

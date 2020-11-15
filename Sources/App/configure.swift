@@ -1,10 +1,13 @@
 import Fluent
 import FluentSQLiteDriver
 import Vapor
+import Leaf
 
 public func configure(_ app: Application) throws {
     
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    
+    app.views.use(.leaf)
 
     configureDatabase(app)
     
