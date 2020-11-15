@@ -23,4 +23,5 @@ public func migrate(_ app: Application) throws {
     app.migrations.add(CreateUsersTable())
     app.migrations.add(CreateOrganizationsTable())
     app.migrations.add(CreateContactsTable())
+    app.migrations.add(SeedTables())
 }

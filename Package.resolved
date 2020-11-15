@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "Fakery",
+        "repositoryURL": "https://github.com/Jeehut/Fakery.git",
+        "state": {
+          "branch": "master",
+          "revision": "7c0b9d82db84bc6d020a379229090c429d57a30e",
+          "version": null
+        }
+      },
+      {
         "package": "fluent",
         "repositoryURL": "https://github.com/vapor/fluent.git",
         "state": {

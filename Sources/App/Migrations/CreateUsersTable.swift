@@ -9,7 +9,7 @@ struct CreateUsersTable: Migration {
             .field("last_name", .string, .required)
             .field("email", .string, .required)
             .field("password", .string)
-            .field("owner", .bool)
+            .field("owner", .bool, .required)
             .field("photo_path", .string)
             .field("remember_token", .string)
             .field("created_at", .datetime, .required)
