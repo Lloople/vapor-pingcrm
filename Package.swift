@@ -13,7 +13,8 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
         .package(url: "https://github.com/Jeehut/Fakery.git", .branch("master")),
         .package(url: "https://github.com/vapor/leaf.git", from: "4.0.0"),
-        .package(url: "https://github.com/lloople/vapor-inertia-adapter.git", from: "0.2.0")
+        .package(url: "https://github.com/lloople/vapor-inertia-adapter.git", from: "0.2.0"),
+        .package(name: "LeafErrorMiddleware", url: "https://github.com/brokenhandsio/leaf-error-middleware.git", from: "2.0.0")
     ],
     targets: [
         .target(
@@ -24,6 +25,7 @@ let package = Package(
                 .product(name: "Fakery", package: "Fakery"),
                 .product(name: "Leaf", package: "leaf"),
                 .product(name: "VaporInertiaAdapter", package: "vapor-inertia-adapter"),
+                "LeafErrorMiddleware",
                 .product(name: "Vapor", package: "vapor")
             ],
             swiftSettings: [

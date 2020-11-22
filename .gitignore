@@ -7,3 +7,8 @@ DerivedData/
 db.sqlite
 .swiftpm
 .env
+node_modules/
+Public/css
+Public/js
+Public/hot
+Public/mix-manifest.json
