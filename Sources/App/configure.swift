@@ -2,9 +2,10 @@ import Fluent
 import FluentSQLiteDriver
 import Vapor
 import Leaf
+import LeafErrorMiddleware
 
 public func configure(_ app: Application) throws {
-    
+    app.middleware.use(LeafErrorMiddleware())
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     
     app.views.use(.leaf)
