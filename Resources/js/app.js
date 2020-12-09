@@ -12,8 +12,10 @@ Vue.use(VueMeta)
 
 InertiaProgress.init()
 
+Vue.config.devtools = process.env.NODE_ENV === 'development'
+
 let app = document.getElementById('app')
-console.log(app)
+
 new Vue({
   metaInfo: {
     titleTemplate: (title) => title ? `${title} - Ping CRM` : 'Ping CRM'
@@ -25,3 +27,5 @@ new Vue({
     },
   }),
 }).$mount(app)
+
+window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app.constructor

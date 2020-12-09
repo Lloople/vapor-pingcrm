@@ -3,10 +3,11 @@ import FluentSQLiteDriver
 import Vapor
 import Leaf
 import LeafErrorMiddleware
+import VaporInertiaAdapter
 
 public func configure(_ app: Application) throws {
-    app.middleware.use(LeafErrorMiddleware())
-    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    
+    configureMiddlewares(app)
     
     app.views.use(.leaf)
 
@@ -15,6 +16,13 @@ public func configure(_ app: Application) throws {
     try migrate(app)
 
     try routes(app)
+}
+
+public func configureMiddlewares(_ app: Application) {
+    app.middleware.use(LeafErrorMiddleware())
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    app.middleware.use(app.sessions.middleware)
+    app.middleware.use(User.sessionAuthenticator())
 }
 
 public func configureDatabase(_ app: Application) {

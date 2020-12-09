@@ -19,8 +19,8 @@ final class User: Model, Content {
     @Field(key: "email")
     var email: String
     
-    @OptionalField(key: "password")
-    var password: String?
+    @Field(key: "password")
+    var password: String
     
     @Field(key: "owner")
     var owner: Bool
@@ -42,15 +42,25 @@ final class User: Model, Content {
     
     init() { }
     
-    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String?, owner: Bool = false) {
+    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String, owner: Bool = false) throws {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.owner = owner
         
-        if password != nil {
-            self.password = try? Bcrypt.hash(password!)
-        }
+        self.password = try Bcrypt.hash(password)
+        
     }
 }
+
+extension User: ModelCredentialsAuthenticatable {
+    static let usernameKey = \User.$email
+    static let passwordHashKey = \User.$password
+    
+    func verify(password: String) throws -> Bool {
+        return try Bcrypt.verify(password, created: self.password)
+    }
+}
+
+extension User: ModelSessionAuthenticatable { }

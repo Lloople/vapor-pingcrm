@@ -15,11 +15,7 @@
 </head>
 <body class="font-sans leading-none text-gray-700 antialiased">
 
-    
-<!--<div id="app" data-page="'{"component": "Dashboard/Index", "page": {}}'"></div>-->
-<div id="app" data-page="{&quot;component&quot;:&quot;Dashboard\/Index&quot;,&quot;props&quot;:{&quot;errors&quot;:{},&quot;auth&quot;:{&quot;user&quot;:{&quot;id&quot;:1,&quot;first_name&quot;:&quot;John&quot;,&quot;last_name&quot;:&quot;Doe&quot;,&quot;email&quot;:&quot;johndoe@example.com&quot;,&quot;role&quot;:null,&quot;account&quot;:{&quot;id&quot;:1,&quot;name&quot;:&quot;Acme Corporation&quot;}}},&quot;flash&quot;:{&quot;success&quot;:null,&quot;error&quot;:null}},&quot;url&quot;:&quot;\/&quot;,&quot;version&quot;:&quot;4f7e069e0a39d7a90d045d8a6e98a106&quot;}"></div>
-
-<!--<div id="app" data-page="{&quot;component&quot;:&quot;Auth\/Login&quot;,&quot;props&quot;:{&quot;errors&quot;:{},&quot;auth&quot;:{&quot;user&quot;:null},&quot;flash&quot;:{&quot;success&quot;:null,&quot;error&quot;:null}},&quot;url&quot;:&quot;\/login&quot;,&quot;version&quot;:&quot;4f7e069e0a39d7a90d045d8a6e98a106&quot;}"></div>-->
+    #inertia(json)
 
 </body>
 </html>

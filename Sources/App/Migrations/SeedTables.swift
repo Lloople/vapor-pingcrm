@@ -7,11 +7,11 @@ struct SeedTables: Migration {
         
         let faker = Faker(locale: "en-US")
         
-        return createAccount(database).flatMap { account -> EventLoopFuture<[Contact]> in
+        return createAccount(database).flatMapThrowing { account throws -> EventLoopFuture<[Contact]> in
             
-            _ = createOwner(database, account)
+            _ = try createOwner(database, account)
             
-            _ = createUsers(database, account, faker)
+            _ = try createUsers(database, account, faker)
             
             return createOrgs(database, account, faker).flatMap { orgs -> EventLoopFuture<[Contact]> in
                 return createContacts(database, account, faker, orgs)
@@ -30,9 +30,9 @@ struct SeedTables: Migration {
         return acc.create(on: database).transform(to: acc)
     }
     
-    func createOwner(_ database: Database, _ account: Account) -> EventLoopFuture<User> {
+    func createOwner(_ database: Database, _ account: Account) throws -> EventLoopFuture<User> {
         
-        let user = User(
+        let user = try User(
             firstName: "John",
             lastName: "Doe",
             email: "johndoe@example.com",
@@ -43,9 +43,9 @@ struct SeedTables: Migration {
         return account.$users.create(user, on: database).transform(to: user)
     }
     
-    func createUsers(_ database: Database, _ account: Account, _ faker: Faker) -> EventLoopFuture<[User]> {
-        return (1...5).map{ _ -> EventLoopFuture<User> in
-            let user = User(
+    func createUsers(_ database: Database, _ account: Account, _ faker: Faker) throws -> EventLoopFuture<[User]> {
+        return try (1...5).map{ _ throws -> EventLoopFuture<User> in
+            let user = try User(
                 firstName: faker.name.firstName(),
                 lastName: faker.name.lastName(),
                 email: faker.internet.safeEmail(),
